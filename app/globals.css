@@ -1,0 +1,180 @@
+:root {
+  color-scheme: light;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #f6f7fb;
+  color: #0f172a;
+}
+
+a {
+  color: #1d4ed8;
+}
+
+.page-container {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 32px 16px 56px;
+}
+
+.page-title {
+  margin: 0;
+  font-size: 2rem;
+  line-height: 1.2;
+}
+
+.page-subtitle {
+  margin: 10px 0 0;
+  color: #334155;
+}
+
+.stack {
+  display: grid;
+  gap: 16px;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 18px;
+}
+
+.card-title {
+  margin: 0 0 8px;
+  font-size: 1.1rem;
+}
+
+.btn-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn,
+.btn-secondary,
+.link-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  line-height: 1;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn {
+  border: 1px solid #1d4ed8;
+  background: #2563eb;
+  color: #fff;
+}
+
+.btn:hover {
+  background: #1d4ed8;
+}
+
+.btn-secondary {
+  border: 1px solid #cbd5e1;
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+.btn-secondary:hover {
+  background: #f1f5f9;
+}
+
+.notice-success {
+  border-left: 4px solid #16a34a;
+  background: #f0fdf4;
+}
+
+.notice-error {
+  border-left: 4px solid #dc2626;
+  background: #fef2f2;
+}
+
+.form-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+}
+
+.field label {
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font: inherit;
+  background: #fff;
+}
+
+.field textarea {
+  resize: vertical;
+}
+
+.inline-field {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 0.92rem;
+}
+
+.muted {
+  margin: 0;
+  color: #475569;
+  font-size: 0.9rem;
+}
+
+.result-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.result-item {
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.result-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 0.92rem;
+}
+
+.result-bar {
+  margin-top: 8px;
+  height: 10px;
+  border-radius: 999px;
+  background: #e2e8f0;
+  overflow: hidden;
+}
+
+.result-bar-fill {
+  height: 100%;
+  background: #2563eb;
+}
