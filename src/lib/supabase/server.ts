@@ -7,14 +7,11 @@ export function createServerSupabaseClient(): SupabaseClient {
   if (_serverClient) return _serverClient
 
   const env = getEnv()
-  if (!env.SUPABASE_SERVICE_ROLE_KEY) {
-    throw new Error('SUPABASE_SERVICE_ROLE_KEY is required for server vote operations')
-  }
-
-  _serverClient = createClient(env.NEXT_PUBLIC_SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_KEY, {
+  _serverClient = createClient(env.NEXT_PUBLIC_SUPABASE_URL, env.NEXT_PUBLIC_SUPABASE_ANON_KEY, {
     auth: {
       autoRefreshToken: false,
       persistSession: false,
+      detectSessionInUrl: false,
     },
   })
 

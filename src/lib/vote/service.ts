@@ -60,6 +60,7 @@ export async function createVote(input: CreateVoteRequest) {
     status: 'active',
   }
 
+  console.log('Creating vote with payload', insertPayload);
   const { data, error } = await supabase
     .from('votes')
     .insert(insertPayload)

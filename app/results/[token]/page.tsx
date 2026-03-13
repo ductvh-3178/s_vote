@@ -10,7 +10,7 @@ export default async function TokenResultPage({ params }: TokenResultPageProps) 
   const env = getEnv()
 
   return (
-    <main>
+    <main className="page-container stack">
       <TokenResultsClient token={token} refreshIntervalMs={env.RESULT_TOKEN_REFRESH_INTERVAL_MS} />
     </main>
   )

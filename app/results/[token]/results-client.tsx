@@ -78,29 +78,45 @@ export function TokenResultsClient({ token, refreshIntervalMs }: TokenResultsCli
   }, [loadResults, refreshIntervalMs])
 
   if (state === 'loading') {
-    return <p>Loading vote results...</p>
+    return <section className="card">Loading vote results...</section>
   }
 
   if (state === 'not-available') {
-    return <p role="alert">{message}</p>
+    return (
+      <section className="card notice-error" role="alert">
+        {message}
+      </section>
+    )
   }
 
   if (!data) {
-    return <p role="alert">Result data is unavailable.</p>
+    return (
+      <section className="card notice-error" role="alert">
+        Result data is unavailable.
+      </section>
+    )
   }
 
   return (
-    <section>
-      <h1>{data.question}</h1>
-      {data.results.length === 0 ? <p>No responses yet.</p> : null}
-      <ul>
+    <section className="card stack">
+      <h1 className="page-title">{data.question}</h1>
+      {data.results.length === 0 ? <p className="muted">No responses yet.</p> : null}
+      <ul className="result-list">
         {data.results.map((result) => (
-          <li key={result.optionId}>
-            {result.label}: {result.votes} votes ({result.percentage}%)
+          <li className="result-item" key={result.optionId}>
+            <div className="result-meta">
+              <strong>{result.label}</strong>
+              <span>
+                {result.votes} votes ({result.percentage}%)
+              </span>
+            </div>
+            <div className="result-bar" aria-hidden="true">
+              <div className="result-bar-fill" style={{ width: `${Math.max(0, Math.min(100, result.percentage))}%` }} />
+            </div>
           </li>
         ))}
       </ul>
-      <p>Last updated: {new Date(data.updatedAt).toISOString()}</p>
+      <p className="muted">Last updated: {new Date(data.updatedAt).toISOString()}</p>
     </section>
   )
 }

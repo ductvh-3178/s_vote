@@ -37,9 +37,21 @@ export async function createVoteAction(formData: FormData): Promise<void> {
     })
     redirect(`/votes/create?${params.toString()}`)
   } catch (error) {
-    if (error instanceof Error && error.message.startsWith('NEXT_REDIRECT:')) {
+    if (error instanceof Error && error.message.startsWith('NEXT_REDIRECT')) {
       throw error
     }
+
+    if (error instanceof Error) {
+      console.error('createVoteAction failed', {
+        message: error.message,
+        stack: error.stack,
+      })
+    } else {
+      console.error('createVoteAction failed with non-Error value', {
+        error,
+      })
+    }
+
     redirect('/votes/create?error=invalid_input')
   }
 }

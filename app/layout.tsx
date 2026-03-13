@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
 import { bootstrapApp } from '@/lib/bootstrap'
+import './globals.css'
 
 bootstrapApp()
 

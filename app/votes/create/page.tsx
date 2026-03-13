@@ -11,47 +11,57 @@ export default async function CreateVotePage({ searchParams }: CreateVotePagePro
   const hasResultUrl = created === '1' && Boolean(resultUrl)
 
   return (
-    <main>
-      <h1>Create a vote</h1>
-      <p>Create an anonymous vote and share the link.</p>
+    <main className="page-container stack">
+      <header>
+        <h1 className="page-title">Create a vote</h1>
+        <p className="page-subtitle">Anonymous flow: create poll, get token URL, share and track results.</p>
+      </header>
 
       {hasResultUrl ? (
-        <section aria-label="Vote created successfully">
+        <section className="card stack notice-success" aria-label="Vote created successfully">
           <p role="status">Vote created successfully.</p>
-          <label htmlFor="resultUrl">Result URL</label>
-          <input id="resultUrl" value={resultUrl} readOnly />
-          <p>
-            <Link href={resultUrl!}>Open result page</Link>
-          </p>
-          <CopyResultUrlButton resultUrl={resultUrl!} />
-          {tokenExpiresAt ? <p>Token expires at: {new Date(tokenExpiresAt).toISOString()}</p> : null}
+          <div className="field">
+            <label htmlFor="resultUrl">Result URL</label>
+            <input id="resultUrl" value={resultUrl} readOnly />
+          </div>
+          <div className="btn-row">
+            <Link className="btn-secondary" href={resultUrl!}>
+              Open result page
+            </Link>
+            <CopyResultUrlButton resultUrl={resultUrl!} />
+          </div>
+          {tokenExpiresAt ? <p className="muted">Token expires at: {new Date(tokenExpiresAt).toISOString()}</p> : null}
         </section>
       ) : null}
 
-      {error ? <p role="alert">Unable to create vote. Please verify your input.</p> : null}
+      {error ? (
+        <section className="card notice-error" role="alert">
+          Unable to create vote. Please verify your input.
+        </section>
+      ) : null}
 
-      <form action={createVoteAction}>
-        <div>
+      <form className="card form-grid" action={createVoteAction}>
+        <div className="field">
           <label htmlFor="question">Question</label>
           <input id="question" name="question" required minLength={3} maxLength={1000} />
         </div>
 
-        <div>
+        <div className="field">
           <label htmlFor="options">Options (one per line)</label>
           <textarea id="options" name="options" required rows={6} />
         </div>
 
-        <div>
+        <div className="field">
           <label htmlFor="openTime">Open time (optional)</label>
           <input id="openTime" name="openTime" type="datetime-local" />
         </div>
 
-        <div>
+        <div className="field">
           <label htmlFor="closeTime">Close time (optional)</label>
           <input id="closeTime" name="closeTime" type="datetime-local" />
         </div>
 
-        <div>
+        <div className="field">
           <label htmlFor="expirationDays">Expiration days (1-30)</label>
           <input
             id="expirationDays"
@@ -63,31 +73,34 @@ export default async function CreateVotePage({ searchParams }: CreateVotePagePro
           />
         </div>
 
-        <div>
-          <label>
+        <div className="inline-field">
+          <label className="inline-field">
             <input name="allowMultiple" type="checkbox" />
             Allow multiple selections
           </label>
         </div>
 
-        <div>
-          <label>
+        <div className="inline-field">
+          <label className="inline-field">
             <input name="requiresPassword" type="checkbox" />
             Require password for voters
           </label>
         </div>
 
-        <div>
+        <div className="field">
           <label htmlFor="password">Password</label>
           <input id="password" name="password" type="password" maxLength={255} />
         </div>
 
-        <button type="submit">Create vote</button>
+        <div className="btn-row">
+          <button className="btn" type="submit">
+            Create vote
+          </button>
+          <Link className="btn-secondary" href="/">
+            Back to home
+          </Link>
+        </div>
       </form>
-
-      <p>
-        <Link href="/">Back to home</Link>
-      </p>
     </main>
   )
 }

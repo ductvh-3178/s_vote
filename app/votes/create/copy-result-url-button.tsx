@@ -16,7 +16,7 @@ export function CopyResultUrlButton({ resultUrl }: CopyResultUrlButtonProps) {
   }
 
   return (
-    <button type="button" onClick={onCopy} aria-live="polite">
+    <button className="btn" type="button" onClick={onCopy} aria-live="polite">
       {copied ? 'Copied' : 'Copy result URL'}
     </button>
   )

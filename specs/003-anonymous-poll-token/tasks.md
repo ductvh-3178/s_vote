@@ -52,7 +52,7 @@
 
 - [ ] T015 [US1] Update create vote API to generate token, store token hash, and return `resultUrl` in `app/api/votes/route.ts`
 - [ ] T016 [US1] Add token expiry persistence and validation at create-time in `src/lib/vote/service.ts`
-- [ ] T017 [US1] Update create form success state to expose/copy token URL in `app/votes/create/page.tsx`
+- [X] T017 [US1] Update create form success state to expose/copy token URL in `app/votes/create/page.tsx`
 - [ ] T018 [US1] [Observability] Add correlation-aware create success/failure logs in `app/api/votes/route.ts`
 - [ ] T019 [US1] [Security] Ensure create response excludes raw token internals and secret fields in `app/api/votes/route.ts`
 
@@ -75,8 +75,8 @@
 ### Implementation for User Story 2
 
 - [ ] T023 [US2] Implement token results API route resolving token hash and returning aggregate payload in `app/api/votes/results/[token]/route.ts`
-- [ ] T024 [US2] Implement token results page loader and error states in `app/results/[token]/page.tsx`
-- [ ] T025 [US2] Add empty-results state UI for zero-response vote in `app/results/[token]/page.tsx`
+- [X] T024 [US2] Implement token results page loader and error states in `app/results/[token]/page.tsx`
+- [X] T025 [US2] Add empty-results state UI for zero-response vote in `app/results/[token]/page.tsx`
 - [ ] T026 [US2] Add malformed-token guard and normalization in `app/api/votes/results/[token]/route.ts`
 - [ ] T027 [US2] [Security] Enforce read-only token path and redact token values in logs in `app/api/votes/results/[token]/route.ts`
 - [ ] T028 [US2] [Observability] Add latency + outcome logs for token resolution in `app/api/votes/results/[token]/route.ts`
@@ -99,7 +99,7 @@
 
 ### Implementation for User Story 3
 
-- [ ] T032 [US3] Implement reusable copy-token-url action/component in `app/votes/create/page.tsx`
+- [X] T032 [US3] Implement reusable copy-token-url action/component in `app/votes/create/page.tsx`
 - [ ] T033 [US3] Implement bounded auto-refresh/revalidation for token results page in `app/results/[token]/page.tsx`
 - [ ] T034 [US3] Add stale-to-unavailable transition handling when token expires during viewing in `app/results/[token]/page.tsx`
 - [ ] T035 [US3] [Observability] Add refresh/expiration transition logs in `app/results/[token]/page.tsx`
