@@ -2,6 +2,11 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 vi.mock('@/lib/vote/service', () => ({
   submitVote: vi.fn(),
+  getVoteAccessGuard: vi.fn().mockResolvedValue({
+    id: '550e8400-e29b-41d4-a716-446655440000',
+    requires_password: false,
+    password_hash: null,
+  }),
   getVoteById: vi.fn().mockResolvedValue({ id: '550e8400-e29b-41d4-a716-446655440000', requiresPassword: false }),
 }))
 
