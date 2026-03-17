@@ -30,6 +30,12 @@ function fromBase64(value: string): Uint8Array {
   return bytes
 }
 
+function toArrayBuffer(bytes: Uint8Array): ArrayBuffer {
+  const arrayBuffer = new ArrayBuffer(bytes.byteLength)
+  new Uint8Array(arrayBuffer).set(bytes)
+  return arrayBuffer
+}
+
 function getStorageKey(voteId: string): string {
   return `${STORAGE_PREFIX}${voteId}`
 }
@@ -44,7 +50,7 @@ async function deriveEncryptionKey(voteId: string, salt: Uint8Array): Promise<Cr
   return window.crypto.subtle.deriveKey(
     {
       name: 'PBKDF2',
-      salt,
+      salt: toArrayBuffer(salt),
       iterations: PBKDF2_ITERATIONS,
       hash: 'SHA-256',
     },
@@ -70,7 +76,7 @@ export async function saveStoredVotePassword(voteId: string, password: string): 
   const encrypted = await window.crypto.subtle.encrypt(
     {
       name: 'AES-GCM',
-      iv,
+      iv: toArrayBuffer(iv),
     },
     key,
     encoder.encode(password)
@@ -109,10 +115,10 @@ export async function readStoredVotePassword(voteId: string): Promise<string | n
     const decrypted = await window.crypto.subtle.decrypt(
       {
         name: 'AES-GCM',
-        iv,
+        iv: toArrayBuffer(iv),
       },
       key,
-      cipherText
+      toArrayBuffer(cipherText)
     )
 
     const decoder = new TextDecoder()
