@@ -19,25 +19,31 @@
 - Tailwind CSS 4
 - Vitest + Testing Library
 
-## 3) Ảnh minh hoạ (bạn chèn sau)
-
-> Bạn có thể thay các đường dẫn ảnh bên dưới bằng ảnh thật sau này.
+## 3) Ảnh minh hoạ
 
 ### Trang chủ
 
-![Home](./docs/images/home.png)
+<img width="1304" height="757" alt="Image" src="https://github.com/user-attachments/assets/79427fec-0578-4de8-a1dc-ed6b3b8fcc8e" />
+
+<img width="1280" height="672" alt="Image" src="https://github.com/user-attachments/assets/251f3cf3-b915-40c2-9b30-b14cdc55371c" />
+
+<img width="1288" height="816" alt="Image" src="https://github.com/user-attachments/assets/31f06c8c-839b-43e0-943c-f27916671485" />
 
 ### Màn tạo poll
 
-![Create Vote](./docs/images/create-vote.png)
+<img width="884" height="904" alt="Image" src="https://github.com/user-attachments/assets/9cfe5ddc-5c12-421b-b846-50fec3930b94" />
+
+<img width="883" height="501" alt="Image" src="https://github.com/user-attachments/assets/58500077-f750-46f3-b665-9c4ca627f19b" />
 
 ### Màn bỏ phiếu
 
-![Vote Page](./docs/images/vote-page.png)
+<img width="881" height="875" alt="Image" src="https://github.com/user-attachments/assets/c6eabbf6-f093-4237-8751-a6788d4fd83a" />
+
 
 ### Màn kết quả theo token
 
-![Results Page](./docs/images/results-page.png)
+
+<img width="955" height="683" alt="Image" src="https://github.com/user-attachments/assets/b6db761a-7710-4a1e-85e2-cc477f755dc1" />
 
 ## 4) Yêu cầu trước khi chạy local
 
