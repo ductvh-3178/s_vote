@@ -1,12 +1,10 @@
-create extension if not exists pgcrypto;
-
 alter table public.votes
   add column if not exists result_token_hash text,
   add column if not exists token_expires_at timestamptz;
 
 update public.votes
 set
-  result_token_hash = coalesce(result_token_hash, encode(digest(share_url, 'sha256'), 'hex')),
+  result_token_hash = coalesce(result_token_hash, encode(sha256(share_url::bytea), 'hex')),
   token_expires_at = coalesce(token_expires_at, expires_at)
 where result_token_hash is null or token_expires_at is null;
 
