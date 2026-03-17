@@ -39,11 +39,10 @@ describe('POST /api/votes/[voteId]/verify-password contract', () => {
       ],
       requiresPassword: true,
       allowMultiple: false,
-      openTime: new Date('2026-03-17T10:00:00.000Z'),
+      openTime: '2026-03-17T10:00:00.000Z',
       closeTime: null,
       isOpen: true,
       status: 'active',
-      expiresAt: new Date('2099-03-17T10:00:00.000Z'),
     })
 
     const response = await POST(
@@ -84,11 +83,10 @@ describe('POST /api/votes/[voteId]/verify-password contract', () => {
       ],
       requiresPassword: true,
       allowMultiple: false,
-      openTime: new Date('2026-03-17T10:00:00.000Z'),
+      openTime: '2026-03-17T10:00:00.000Z',
       closeTime: null,
       isOpen: true,
       status: 'active',
-      expiresAt: new Date('2099-03-17T10:00:00.000Z'),
     })
     vi.mocked(getExistingVoteResponse).mockResolvedValue(['550e8400-e29b-41d4-a716-446655440002'])
 
