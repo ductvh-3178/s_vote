@@ -1,192 +1,167 @@
 # S Vote
 
-Frontend-first voting baseline built with Next.js (TypeScript), Supabase Browser Client,
-and Vercel deployment.
+Ứng dụng tạo poll ẩn danh, cho phép chia sẻ link bỏ phiếu và link xem kết quả theo token.
 
-## Stack
+## 1) Chức năng chính
 
-- Next.js App Router + TypeScript strict mode
-- Supabase JS Browser Client for frontend operations
-- Supabase Edge Functions for admin-privileged actions
-- Vercel for preview and production deploys
-- Vitest for unit/integration tests
+- Tạo poll với nhiều lựa chọn.
+- Chia sẻ link bỏ phiếu cho người dùng.
+- Bỏ phiếu ẩn danh (không cần đăng nhập).
+- Hỗ trợ poll có mật khẩu (xác thực trước khi vote).
+- Xem kết quả qua link token riêng.
+- Cập nhật kết quả theo chu kỳ refresh.
 
-## How To Run Project
+## 2) Công nghệ chính
 
-### 1. Run In Development Mode (Recommended)
+- Next.js App Router + TypeScript (strict mode)
+- React 19
+- Supabase (Database + Auth key + Edge Functions)
+- Tailwind CSS 4
+- Vitest + Testing Library
 
-1. Install dependencies:
+## 3) Ảnh minh hoạ (bạn chèn sau)
+
+> Bạn có thể thay các đường dẫn ảnh bên dưới bằng ảnh thật sau này.
+
+### Trang chủ
+
+![Home](./docs/images/home.png)
+
+### Màn tạo poll
+
+![Create Vote](./docs/images/create-vote.png)
+
+### Màn bỏ phiếu
+
+![Vote Page](./docs/images/vote-page.png)
+
+### Màn kết quả theo token
+
+![Results Page](./docs/images/results-page.png)
+
+## 4) Yêu cầu trước khi chạy local
+
+Đảm bảo máy đã cài:
+
+- Node.js 20+ (khuyến nghị LTS)
+- npm 10+
+- Docker Desktop (hoặc Docker Engine + Docker Compose)
+- Supabase CLI
+
+Kiểm tra nhanh:
+
+```bash
+node -v
+npm -v
+docker -v
+docker compose version
+supabase -v
+```
+
+## 5) Hướng dẫn chạy local step-by-step
+
+### Bước 1: Cài dependencies
 
 ```bash
 npm install
 ```
 
-2. Create local env file:
+### Bước 2: Tạo file env local
 
 ```bash
 cp .env.example .env.local
 ```
 
-3. Set required variables in `.env.local`:
-
-```bash
-NEXT_PUBLIC_SUPABASE_URL=https://<project-ref>.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=<anon-key>
-APP_URL=http://localhost:3000
-LOG_LEVEL=info
-```
-
-4. Run the app:
-
-```bash
-npm run dev
-```
-
-App URL: `http://localhost:3000`
-
-5. Run tests:
-
-```bash
-npm run test
-```
-
-### 2. Run Production Build Locally
-
-```bash
-npm run build
-npm run start
-```
-
-### 3. Run With Docker
-
-1. Ensure `.env.local` (or exported env vars) includes:
-
-```bash
-NEXT_PUBLIC_SUPABASE_URL=https://<project-ref>.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=<anon-key>
-APP_URL=http://localhost:3000
-```
-
-2. Build and start with Docker Compose:
-
-```bash
-docker compose up --build
-```
-
-3. Stop containers:
-
-```bash
-docker compose down
-```
-
-## Run Supabase Local
-
-### 1. Start Supabase Local
+### Bước 3: Khởi động Supabase local
 
 ```bash
 supabase start
 ```
 
-### 2. Check Supabase Local Status
+### Bước 4: Lấy thông tin local từ Supabase
 
 ```bash
 supabase status
 ```
 
-Command output will provide local services such as:
+Ghi lại các giá trị quan trọng:
 
 - API URL
-- DB URL
-- Studio URL
 - anon key
-- service role key
+- service_role key
 
-### 3. Update `.env.local`
+### Bước 5: Cập nhật `.env.local`
 
-Copy the local `API URL` and `anon key` from `supabase status` into `.env.local`:
+Mẫu tối thiểu để chạy local:
 
-```bash
+```env
 NEXT_PUBLIC_SUPABASE_URL=http://127.0.0.1:54321
 NEXT_PUBLIC_SUPABASE_ANON_KEY=<local-anon-key>
+SUPABASE_SERVICE_ROLE_KEY=<local-service-role-key>
 APP_URL=http://localhost:3000
 LOG_LEVEL=info
 ```
 
-### 4. Apply Migrations Locally
+> Lưu ý bảo mật: `SUPABASE_SERVICE_ROLE_KEY` chỉ dùng cho local/dev, không commit lên git.
+
+### Bước 6: Reset DB và apply migrations local
 
 ```bash
 npm run supabase:db:reset:local
 ```
 
-### 5. Serve Or Deploy Edge Functions
-
-Serve locally during development:
+### Bước 7: Chạy Edge Function local (terminal riêng)
 
 ```bash
 supabase functions serve admin-task --no-verify-jwt
 ```
 
-Deploy to remote project when needed:
+### Bước 8: Chạy ứng dụng Next.js (terminal riêng)
 
 ```bash
-supabase functions deploy admin-task
+npm run dev
 ```
 
-### 6. Stop Supabase Local
+Mở trình duyệt tại:
+
+- App: `http://localhost:3000`
+
+### Bước 9: Chạy test
 
 ```bash
-supabase stop
+npm run test
 ```
 
-### Recommended Local Workflow
-
-1. `supabase start`
-2. Update `.env.local` with local values from `supabase status`
-3. `npm run supabase:db:reset:local`
-4. `npm run dev`
-5. `supabase functions serve admin-task --no-verify-jwt`
-
-## CI Quality Gate
-
-Run all local quality checks:
+Nếu cần chạy full quality gate local:
 
 ```bash
 npm run ci:check
 ```
 
-This validates TypeScript, ESLint, tests, Next.js build, and Docker startup checks.
+## 6) Luồng kiểm thử thủ công nhanh
 
-## Supabase CLI Operations
+1. Vào `http://localhost:3000`.
+2. Tạo poll mới tại `/votes/create`.
+3. Copy link vote và link results sau khi tạo thành công.
+4. Mở link vote, thực hiện bỏ phiếu.
+5. Mở link results để kiểm tra kết quả cập nhật.
+6. Với poll có mật khẩu: xác thực mật khẩu trước khi vote.
 
-Migrations and Edge Function deploy are managed with Supabase CLI:
+## 7) Lệnh local thường dùng
 
 ```bash
+npm run dev
+npm run test
+npm run typecheck
+npm run lint
 npm run supabase:db:reset:local
-npm run supabase:db:push
-supabase functions deploy admin-task
+supabase functions serve admin-task --no-verify-jwt
+supabase stop
 ```
 
-Use `npm run supabase:db:reset:local` for the local Docker-based stack. Use `npm run supabase:db:push` only after linking this workspace to a remote Supabase project with `supabase link --project-ref <project-ref> --password <db-password>`.
+## 8) Troubleshooting nhanh
 
-## Security Boundary
-
-- Frontend uses only `NEXT_PUBLIC_SUPABASE_ANON_KEY`.
-- Admin operations must go through `supabase/functions/admin-task/index.ts`.
-- `SUPABASE_SERVICE_ROLE_KEY` must be configured only as Edge Function secret.
-
-## Vercel Deployment (GitHub Integration)
-
-1. Connect repository in Vercel dashboard.
-2. Set environment variables in Vercel project settings:
-	- `NEXT_PUBLIC_SUPABASE_URL`
-	- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-	- `APP_URL`
-	- `LOG_LEVEL`
-3. Push to GitHub:
-	- Pull requests create preview deployments
-	- `main` branch updates production deployment
-
-## Observability
-
-- Structured JSON logs are emitted by `src/lib/logger.ts`.
-- Correlation IDs are propagated through Edge Function invocations for traceability.
+- Lỗi thiếu biến môi trường: kiểm tra lại `.env.local` và restart `npm run dev`.
+- Lỗi kết nối Supabase local: chạy lại `supabase status`, đảm bảo Docker đang chạy.
+- Lỗi dữ liệu không đúng schema: chạy lại `npm run supabase:db:reset:local`.
+- Lỗi API admin-task: kiểm tra terminal đang chạy `supabase functions serve admin-task --no-verify-jwt`.
