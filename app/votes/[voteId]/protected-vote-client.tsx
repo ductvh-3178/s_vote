@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import type { VoteOption } from '@/types/contracts'
 import { clearStoredVotePassword, readStoredVotePassword, saveStoredVotePassword } from './password-store'
 import { VoteForm } from './vote-form'
@@ -27,7 +27,7 @@ export function ProtectedVoteClient({ voteId }: ProtectedVoteClientProps) {
   const [message, setMessage] = useState<string>('')
   const [isLoading, setIsLoading] = useState(false)
 
-  async function restoreFromStoredPassword() {
+  const restoreFromStoredPassword = useCallback(async function restoreFromStoredPassword() {
     setIsLoading(true)
     setMessage('Restoring password session...')
 
@@ -74,11 +74,11 @@ export function ProtectedVoteClient({ voteId }: ProtectedVoteClientProps) {
     } finally {
       setIsLoading(false)
     }
-  }
+  }, [voteId])
 
   useEffect(() => {
     void restoreFromStoredPassword()
-  }, [voteId])
+  }, [restoreFromStoredPassword])
 
   async function handleVerified(token: string, password: string, nextVote: ProtectedVoteResponse) {
     setUnlockToken(token)
