@@ -40,10 +40,10 @@ export default function HomePage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Link
               href="/votes/create"
-              className="group relative inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 ease-out hover:scale-105 active:scale-95"
+              className="group relative inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-blue-700 to-indigo-700 px-8 py-4 font-semibold !text-white shadow-xl shadow-blue-900/25 ring-1 ring-blue-800/20 transition-all duration-300 ease-out hover:from-blue-800 hover:to-indigo-800 hover:shadow-2xl hover:shadow-blue-900/35 hover:scale-105 active:scale-95"
             >
               <span className="absolute inset-0 bg-white rounded-xl opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
-              <span className="relative flex items-center gap-2">
+              <span className="relative z-10 flex items-center gap-2 text-white [text-shadow:0_1px_2px_rgb(0_0_0_/_0.28)]">
                 Create Your First Poll
                 <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
@@ -97,7 +97,7 @@ export default function HomePage() {
                   100% Anonymous
                 </h3>
                 <p className="text-gray-600 leading-relaxed">
-                  No login required. Your voters' privacy is completely protected and secure.
+                  No login required. Your voters&apos; privacy is completely protected and secure.
                 </p>
               </div>
             </div>
